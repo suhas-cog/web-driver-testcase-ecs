@@ -35,18 +35,18 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::739275441922:role/2195618-GITHUB-OIDC-ROLE
+          role-to-assume: arn:aws:iam::739275441922:role/2302372-GITHUB-OIDC-ROLE
           # role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
       # Upload a file to AWS s3
       - name:  Build Docker image
         if: inputs.teardown == 'false'
         run: |
-          aws ecs update-service --cluster 2195618-TestCluster --service test-run --desired-count ${{inputs.max_runners}}
+          aws ecs update-service --cluster poc-github-devops --service github-runners-service-poc --desired-count ${{inputs.max_runners}}
       - name:  Build Docker image
         if: inputs.teardown == 'true'
         run: |
-          aws ecs update-service --cluster 2195618-TestCluster --service test-run --desired-count 0
+          aws ecs update-service --cluster poc-github-devops --service github-runners-service-poc --desired-count 0
     
           
 
