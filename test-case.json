@@ -1,0 +1,10 @@
+{
+    "release1": [
+      "suite1",
+      "suite2"
+    ],
+    "app-1": [
+      "suite3",
+      "suite2"
+    ]
+  }

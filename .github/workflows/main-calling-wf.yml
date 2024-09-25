@@ -1,0 +1,33 @@
+name: calling-jobs-updated-sample
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Provide environment name'
+        required: false
+jobs:
+  smoke:
+    uses: ./.github/workflows/execution-workflow.yml
+    with:
+      suite_name: "smoke"
+      runner_label: "ubuntu-latest"
+  release1:
+    uses: ./.github/workflows/execution-workflow.yml
+    with:
+        suite_name: "release1"
+        runner_label: "ubuntu-latest"
+        project: "sep 20 project"
+
+  multiple_suites:
+    needs: release1
+    uses: ./.github/workflows/execution-workflow.yml
+    with:
+        suite_name: "suite1 suite2"
+        runner_label: "ubuntu-latest"
+  another_call:
+    needs: release1
+    uses: ./.github/workflows/second-call.yml
+    with:
+        suite_name: "suite1 suite2"
+        runner_label: "ubuntu-latest"

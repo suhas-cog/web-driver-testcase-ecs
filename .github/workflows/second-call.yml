@@ -1,0 +1,56 @@
+name: second call
+
+on:
+  workflow_dispatch:
+    inputs:
+      suite_name:
+        description: 'Provide suitename name'
+        required: false
+        default: "smoke"
+      project:
+        description: 'sample project name'
+        type: string
+        default: sample-project
+      runner_label:
+        description: 'Runner label'
+        type: string
+        default: 'self-hosted'
+  workflow_call:
+    inputs:
+      suite_name:
+        description: 'Test case to run'
+        required: true
+        type: string
+      project:
+        description: 'sample project name'
+        type: string
+        default: sample-project
+      runner_label:
+        description: 'Runner label'
+        type: string
+        default: 'self-hosted'
+    #   username:
+    #     type: string
+    # secrets:
+    #   password:
+    #     required: true
+
+
+jobs:
+  run-test:
+    runs-on: ${{inputs.runner_label}}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install node dependencies
+        run: npm install
+
+      - name: Run Test Case
+        run: |
+          # Run the test case
+          echo "Running test case: ${{ inputs.suite_name }} with ${{ inputs.project }}"
+          npx wdio --suite ${{ inputs.suite_name }}

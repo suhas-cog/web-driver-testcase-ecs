@@ -1,0 +1,40 @@
+{
+    "app1": {
+        "suites": [
+            {
+                "test": "suite2",
+                "project":"project1",
+                "password" : "${{secrets.PASSWORD}}",
+                "username" : "${{var.USERNAME}}"
+            },
+            {
+                "test": "suite3 suite4",
+                "project":"project2",
+                "password" : "${{secrets.PASSWORD}}",
+                "username" : "${{var.USERNAME}}"
+            },
+            {
+                "test": "suite1 suite2",
+                "project":"project3",
+                "password" : "${{secrets.PASSWORD}}",
+                "username" : "${{var.USERNAME}}"
+            },
+            {
+                "test": "suite3",
+                "project":"release10",
+                "password" : "${{secrets.PASSWORD}}",
+                "username" : "${{var.USERNAME}}"
+            }
+        ]
+    }
+    ,
+    "app3": {
+        "include": [{
+            "test": "suite1 suite3"
+        },
+        {
+            "test": "suite4"
+        }
+    ]
+    }
+}

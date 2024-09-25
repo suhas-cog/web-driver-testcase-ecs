@@ -1,0 +1,48 @@
+name: Local-runner-using-self-hosted
+
+# on:
+#   push:
+#     branches:
+#       - main
+on: 
+  workflow_dispatch:
+    inputs:
+      runner_label:
+        description: 'Runner label'
+        type: string
+        default: 'self-hosted'
+    #   hub-url:
+    #     description: 'Test scenario tags'
+    #     default: 
+  workflow_call:
+    inputs:
+      runner_label:
+        description: 'runner_name'
+        type: string
+        default: "self-hosted"
+jobs:
+  parallel-tests:
+    # runs-on: ubuntu-latest
+    runs-on: ${{inputs.runner_label}}
+    strategy:
+      matrix:
+        suite: ["suite1 suite2", "suite3 suite4"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install node dep
+        run: npm install
+
+      - name: Run WDIO Tests
+        run: |
+          pwd
+          ls
+          date
+          npx wdio ./wdio.conf.js --suite ${{ matrix.suite }}
+          # docker run --net grid test-image npx wdio -h 10.120.100.161 -p 4444 --path "/wd/hub" --suite ${{ matrix.suite }}
