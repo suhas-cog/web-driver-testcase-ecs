@@ -35,7 +35,7 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::739275441922:role/2302372-GITHUB-OIDC-ROLE
+          role-to-assume: arn:aws:ssm:us-east-1:739275441922:parameter/suhas-GH-Token
           # role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
       # Upload a file to AWS s3
