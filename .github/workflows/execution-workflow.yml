@@ -35,7 +35,6 @@ on:
     #   password:
     #     required: true
 
-
 jobs:
   run-test:
     runs-on: ${{inputs.runner_label}}
