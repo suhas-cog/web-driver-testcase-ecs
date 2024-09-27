@@ -8,12 +8,12 @@ on:
   #   types:
   #     - completed
 
-  
+
 jobs:
 
   build:
 
-    runs-on: TR-GitHub-ECS
+    runs-on: TR-GitHub-ECS-POC
     
     steps:
 
