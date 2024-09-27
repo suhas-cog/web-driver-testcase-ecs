@@ -8,11 +8,12 @@ on:
   #   types:
   #     - completed
 
+
 jobs:
 
   build:
 
-    runs-on: dockerNodeDevOps-7lebe
+    runs-on: TR-GitHub-ECS-POC
     
     steps:
 
